@@ -6,8 +6,8 @@ that can then be parsed into model objects.
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass, field
-from typing import Iterator, Optional
 
 from .tokenizer import GedcomLine
 
@@ -30,10 +30,10 @@ class GedcomNode:
 
     level: int
     tag: str
-    value: Optional[str] = None
-    xref: Optional[str] = None
+    value: str | None = None
+    xref: str | None = None
     line_number: int = 0
-    children: list["GedcomNode"] = field(default_factory=list)
+    children: list[GedcomNode] = field(default_factory=list)
 
     @classmethod
     def from_line(cls, line: GedcomLine) -> GedcomNode:
@@ -46,7 +46,7 @@ class GedcomNode:
             line_number=line.line_number,
         )
 
-    def get_child(self, tag: str) -> Optional["GedcomNode"]:
+    def get_child(self, tag: str) -> GedcomNode | None:
         """Get the first child with the given tag.
 
         Args:
@@ -60,7 +60,7 @@ class GedcomNode:
                 return child
         return None
 
-    def get_children(self, tag: str) -> list["GedcomNode"]:
+    def get_children(self, tag: str) -> list[GedcomNode]:
         """Get all children with the given tag.
 
         Args:
@@ -71,7 +71,7 @@ class GedcomNode:
         """
         return [child for child in self.children if child.tag == tag]
 
-    def get_child_value(self, tag: str) -> Optional[str]:
+    def get_child_value(self, tag: str) -> str | None:
         """Get the value of the first child with the given tag.
 
         Args:
@@ -103,7 +103,7 @@ class GedcomNode:
 
         return "".join(parts)
 
-    def get_custom_tags(self) -> dict[str, list["GedcomNode"]]:
+    def get_custom_tags(self) -> dict[str, list[GedcomNode]]:
         """Get all custom (underscore-prefixed) child tags.
 
         Returns:

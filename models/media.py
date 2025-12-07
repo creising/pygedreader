@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#MULTIMEDIA_RECORD
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel, GedcomRecord
@@ -32,19 +30,19 @@ class MediaFile(GedcomBaseModel):
         title: Title of the media. GEDCOM tag: TITL
     """
 
-    path: Optional[str] = Field(
+    path: str | None = Field(
         None,
         description="File path or reference. GEDCOM tag: FILE",
     )
-    format: Optional[str] = Field(
+    format: str | None = Field(
         None,
         description="File format (jpg, png, pdf). GEDCOM tag: FORM",
     )
-    media_type: Optional[str] = Field(
+    media_type: str | None = Field(
         None,
         description="General media type (image, video). GEDCOM tag: TYPE",
     )
-    title: Optional[str] = Field(
+    title: str | None = Field(
         None,
         description="Title of the media. GEDCOM tag: TITL",
     )
@@ -77,15 +75,15 @@ class MediaObject(GedcomRecord):
         place: Place depicted in media. GEDCOM tag: PLAC
     """
 
-    file: Optional[MediaFile] = Field(
+    file: MediaFile | None = Field(
         None,
         description="File information. GEDCOM tag: FILE",
     )
-    date: Optional[GedcomDate] = Field(
+    date: GedcomDate | None = Field(
         None,
         description="Date of media subject. GEDCOM tag: DATE",
     )
-    place: Optional[Place] = Field(
+    place: Place | None = Field(
         None,
         description="Place depicted in media. GEDCOM tag: PLAC",
     )

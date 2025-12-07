@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#PERSONAL_NAME_STRUCTU
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel
@@ -41,27 +39,27 @@ class Name(GedcomBaseModel):
         ...,
         description="Complete name string. GEDCOM tag: NAME",
     )
-    first_name: Optional[str] = Field(
+    first_name: str | None = Field(
         None,
         description="Given/first name(s). GEDCOM tag: GIVN",
     )
-    surname: Optional[str] = Field(
+    surname: str | None = Field(
         None,
         description="Family name. GEDCOM tag: SURN",
     )
-    prefix: Optional[str] = Field(
+    prefix: str | None = Field(
         None,
         description="Name prefix (Dr., Rev., etc.). GEDCOM tag: NPFX",
     )
-    suffix: Optional[str] = Field(
+    suffix: str | None = Field(
         None,
         description="Name suffix (Jr., III, etc.). GEDCOM tag: NSFX",
     )
-    nickname: Optional[str] = Field(
+    nickname: str | None = Field(
         None,
         description="Nickname or familiar name. GEDCOM tag: NICK",
     )
-    name_type: Optional[str] = Field(
+    name_type: str | None = Field(
         None,
         description="Type of name (birth, married, aka). GEDCOM tag: TYPE",
     )
@@ -83,8 +81,8 @@ class Name(GedcomBaseModel):
             Name with full text preserved and components parsed.
         """
         full = name_str.strip()
-        first_name: Optional[str] = None
-        surname: Optional[str] = None
+        first_name: str | None = None
+        surname: str | None = None
 
         # Parse "Given /Surname/" format
         if "/" in full:

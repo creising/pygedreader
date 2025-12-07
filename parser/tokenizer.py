@@ -17,9 +17,9 @@ Examples:
 from __future__ import annotations
 
 import re
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Iterator, Optional, TextIO
-
+from typing import TextIO
 
 # Regex pattern for parsing GEDCOM lines
 # Format: LEVEL [XREF] TAG [VALUE]
@@ -46,8 +46,8 @@ class GedcomLine:
 
     level: int
     tag: str
-    value: Optional[str]
-    xref: Optional[str]
+    value: str | None
+    xref: str | None
     line_number: int
 
     @property
@@ -61,7 +61,7 @@ class GedcomLine:
         return self.tag.startswith("_")
 
 
-def tokenize_line(line: str, line_number: int) -> Optional[GedcomLine]:
+def tokenize_line(line: str, line_number: int) -> GedcomLine | None:
     """Parse a single GEDCOM line into a GedcomLine token.
 
     Args:

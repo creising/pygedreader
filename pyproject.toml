@@ -3,7 +3,7 @@ name = "pygedreader"
 version = "0.1.0"
 description = "A Python library for parsing GEDCOM files with Ancestry.com export support"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 dependencies = [
     "pydantic>=2.12.5",
 ]
@@ -13,5 +13,29 @@ pygedreader = "cli:main"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.14",
     "pytest>=9.0.2",
+    "ruff>=0.8",
 ]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disable_error_code = ["union-attr"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["SIM105"]  # Allow try-except-pass for clarity

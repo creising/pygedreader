@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#NOTE_STRUCTURE
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel, XRef
@@ -41,13 +39,13 @@ class Note(GedcomBaseModel):
         default_factory=dict,
         description="Key-value pairs extracted from structured notes.",
     )
-    xref: Optional[XRef] = Field(
+    xref: XRef | None = Field(
         None,
         description="Reference to standalone NOTE record. GEDCOM format: @N123@",
     )
 
     @classmethod
-    def from_string(cls, note_str: str, xref: Optional[XRef] = None) -> Note:
+    def from_string(cls, note_str: str, xref: XRef | None = None) -> Note:
         """Parse a note string, extracting key-value pairs if structured.
 
         Looks for patterns like "Key: Value" or "Key: Value; Key2: Value2"

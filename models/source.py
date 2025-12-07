@@ -8,7 +8,7 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#SOURCE_RECORD
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from pydantic import Field
 
@@ -36,11 +36,11 @@ class SourcePublication(GedcomBaseModel):
         ...,
         description="Publisher/publication text. GEDCOM tag: PUBL",
     )
-    date: Optional[GedcomDate] = Field(
+    date: GedcomDate | None = Field(
         None,
         description="Publication date. GEDCOM tag: DATE",
     )
-    place: Optional[Place] = Field(
+    place: Place | None = Field(
         None,
         description="Publication place. GEDCOM tag: PLAC",
     )
@@ -70,27 +70,27 @@ class Source(GedcomRecord):
         notes: Notes about this source. GEDCOM tag: NOTE
     """
 
-    title: Optional[str] = Field(
+    title: str | None = Field(
         None,
         description="Source title. GEDCOM tag: TITL",
     )
-    author: Optional[str] = Field(
+    author: str | None = Field(
         None,
         description="Author name(s). GEDCOM tag: AUTH",
     )
-    abbreviation: Optional[str] = Field(
+    abbreviation: str | None = Field(
         None,
         description="Short title or abbreviation. GEDCOM tag: ABBR",
     )
-    publication: Optional[SourcePublication] = Field(
+    publication: SourcePublication | None = Field(
         None,
         description="Publication details. GEDCOM tag: PUBL",
     )
-    repository_xref: Optional[XRef] = Field(
+    repository_xref: XRef | None = Field(
         None,
         description="Reference to repository. GEDCOM tag: REPO",
     )
-    repository: Optional["Repository"] = Field(
+    repository: Repository | None = Field(
         None,
         exclude=True,
         description="Resolved Repository object (populated after parsing).",

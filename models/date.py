@@ -12,7 +12,6 @@ from __future__ import annotations
 import re
 from datetime import date
 from enum import Enum
-from typing import Optional
 
 from pydantic import Field
 
@@ -38,20 +37,24 @@ class DateModifier(str, Enum):
 
 # Month name mappings
 MONTH_MAP: dict[str, int] = {
-    "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6,
-    "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12,
+    "JAN": 1,
+    "FEB": 2,
+    "MAR": 3,
+    "APR": 4,
+    "MAY": 5,
+    "JUN": 6,
+    "JUL": 7,
+    "AUG": 8,
+    "SEP": 9,
+    "OCT": 10,
+    "NOV": 11,
+    "DEC": 12,
 }
 
 # Regex patterns for date parsing
-STANDARD_DATE_PATTERN = re.compile(
-    r"^(?P<day>\d{1,2})?\s*(?P<month>[A-Za-z]{3})?\s*(?P<year>\d{4})$"
-)
-SLASH_DATE_PATTERN = re.compile(
-    r"^(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<year>\d{4})$"
-)
-YEAR_RANGE_PATTERN = re.compile(
-    r"^(?P<year_start>\d{4})-(?P<year_end>\d{4})$"
-)
+STANDARD_DATE_PATTERN = re.compile(r"^(?P<day>\d{1,2})?\s*(?P<month>[A-Za-z]{3})?\s*(?P<year>\d{4})$")
+SLASH_DATE_PATTERN = re.compile(r"^(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<year>\d{4})$")
+YEAR_RANGE_PATTERN = re.compile(r"^(?P<year_start>\d{4})-(?P<year_end>\d{4})$")
 MODIFIER_PATTERN = re.compile(
     r"^(?P<modifier>ABT\.?|CAL\.?|EST\.?|BEF\.?|AFT\.?|ABOUT|BEFORE|AFTER)\s+",
     re.IGNORECASE,
@@ -94,21 +97,21 @@ class GedcomDate(GedcomBaseModel):
         ...,
         description="Original date text from GEDCOM. GEDCOM tag: DATE",
     )
-    modifier: Optional[DateModifier] = Field(
+    modifier: DateModifier | None = Field(
         None,
         description="Date precision modifier (ABT, BEF, AFT, etc.).",
     )
-    year: Optional[int] = Field(None, description="Parsed year component.")
-    month: Optional[int] = Field(None, description="Parsed month (1-12).")
-    day: Optional[int] = Field(None, description="Parsed day (1-31).")
-    year_end: Optional[int] = Field(None, description="End year for date ranges.")
-    month_end: Optional[int] = Field(None, description="End month for date ranges.")
-    day_end: Optional[int] = Field(None, description="End day for date ranges.")
-    date_value: Optional[date] = Field(
+    year: int | None = Field(None, description="Parsed year component.")
+    month: int | None = Field(None, description="Parsed month (1-12).")
+    day: int | None = Field(None, description="Parsed day (1-31).")
+    year_end: int | None = Field(None, description="End year for date ranges.")
+    month_end: int | None = Field(None, description="End month for date ranges.")
+    day_end: int | None = Field(None, description="End day for date ranges.")
+    date_value: date | None = Field(
         None,
         description="Python date object if fully parseable.",
     )
-    date_end_value: Optional[date] = Field(
+    date_end_value: date | None = Field(
         None,
         description="Python date for range end if parseable.",
     )
@@ -130,15 +133,15 @@ class GedcomDate(GedcomBaseModel):
         """
         original = date_str.strip()
         working = original
-        modifier: Optional[DateModifier] = None
-        year: Optional[int] = None
-        month: Optional[int] = None
-        day: Optional[int] = None
-        year_end: Optional[int] = None
-        month_end: Optional[int] = None
-        day_end: Optional[int] = None
-        date_value: Optional[date] = None
-        date_end_value: Optional[date] = None
+        modifier: DateModifier | None = None
+        year: int | None = None
+        month: int | None = None
+        day: int | None = None
+        year_end: int | None = None
+        month_end: int | None = None
+        day_end: int | None = None
+        date_value: date | None = None
+        date_end_value: date | None = None
 
         # Check for BETWEEN...AND pattern first
         between_match = BETWEEN_PATTERN.match(working)
@@ -160,7 +163,7 @@ class GedcomDate(GedcomBaseModel):
             if mod_match:
                 mod_text = mod_match.group("modifier").upper().rstrip(".")
                 modifier = _map_modifier(mod_text)
-                working = working[mod_match.end():].strip()
+                working = working[mod_match.end() :].strip()
 
             # Check for year range (Ancestry quirk: "2010-2019")
             range_match = YEAR_RANGE_PATTERN.match(working)
@@ -207,7 +210,7 @@ class GedcomDate(GedcomBaseModel):
         return self.original
 
 
-def _parse_date_parts(date_str: str) -> tuple[Optional[int], Optional[int], Optional[int]]:
+def _parse_date_parts(date_str: str) -> tuple[int | None, int | None, int | None]:
     """Parse a date string into year, month, day components.
 
     Args:

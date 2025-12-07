@@ -8,7 +8,7 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#FAM_RECORD
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from pydantic import Field
 
@@ -37,7 +37,7 @@ class SpouseLink(GedcomBaseModel):
         ...,
         description="Reference to INDI record. GEDCOM tag: HUSB or WIFE",
     )
-    individual: Optional["Individual"] = Field(
+    individual: Individual | None = Field(
         None,
         exclude=True,
         description="Resolved Individual object (populated after parsing).",
@@ -63,7 +63,7 @@ class ChildLink(GedcomBaseModel):
         ...,
         description="Reference to INDI record. GEDCOM tag: CHIL",
     )
-    individual: Optional["Individual"] = Field(
+    individual: Individual | None = Field(
         None,
         exclude=True,
         description="Resolved Individual object (populated after parsing).",
@@ -107,19 +107,19 @@ class Family(GedcomRecord):
     )
 
     # Family events
-    marriage: Optional[FamilyEvent] = Field(
+    marriage: FamilyEvent | None = Field(
         None,
         description="Marriage event. GEDCOM tag: MARR",
     )
-    divorce: Optional[FamilyEvent] = Field(
+    divorce: FamilyEvent | None = Field(
         None,
         description="Divorce event. GEDCOM tag: DIV",
     )
-    annulment: Optional[FamilyEvent] = Field(
+    annulment: FamilyEvent | None = Field(
         None,
         description="Annulment event. GEDCOM tag: ANUL",
     )
-    engagement: Optional[FamilyEvent] = Field(
+    engagement: FamilyEvent | None = Field(
         None,
         description="Engagement event. GEDCOM tag: ENGA",
     )
@@ -158,7 +158,7 @@ class Family(GedcomRecord):
         """
         return [c.xref for c in self.children]
 
-    def get_spouse_by_role(self, role: str) -> Optional[SpouseLink]:
+    def get_spouse_by_role(self, role: str) -> SpouseLink | None:
         """Get spouse by their original GEDCOM role.
 
         Args:

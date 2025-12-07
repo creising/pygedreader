@@ -1,6 +1,6 @@
 """Tests for GEDCOM line tokenizer."""
 
-from parser.tokenizer import GedcomLine, tokenize_line, tokenize_string
+from parser.tokenizer import tokenize_line, tokenize_string
 
 
 class TestTokenizeLine:

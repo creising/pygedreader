@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#REPOSITORY_RECORD
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel, GedcomRecord
@@ -37,27 +35,27 @@ class Address(GedcomBaseModel):
         ...,
         description="Complete address text. GEDCOM tag: ADDR",
     )
-    line1: Optional[str] = Field(
+    line1: str | None = Field(
         None,
         description="First address line. GEDCOM tag: ADR1",
     )
-    line2: Optional[str] = Field(
+    line2: str | None = Field(
         None,
         description="Second address line. GEDCOM tag: ADR2",
     )
-    city: Optional[str] = Field(
+    city: str | None = Field(
         None,
         description="City. GEDCOM tag: CITY",
     )
-    state: Optional[str] = Field(
+    state: str | None = Field(
         None,
         description="State or province. GEDCOM tag: STAE",
     )
-    postal_code: Optional[str] = Field(
+    postal_code: str | None = Field(
         None,
         description="Postal/ZIP code. GEDCOM tag: POST",
     )
-    country: Optional[str] = Field(
+    country: str | None = Field(
         None,
         description="Country. GEDCOM tag: CTRY",
     )
@@ -85,19 +83,19 @@ class Repository(GedcomRecord):
         ...,
         description="Repository name. GEDCOM tag: NAME",
     )
-    address: Optional[Address] = Field(
+    address: Address | None = Field(
         None,
         description="Postal address. GEDCOM tag: ADDR",
     )
-    phone: Optional[str] = Field(
+    phone: str | None = Field(
         None,
         description="Phone number. GEDCOM tag: PHON",
     )
-    email: Optional[str] = Field(
+    email: str | None = Field(
         None,
         description="Email address. GEDCOM tag: EMAIL",
     )
-    website: Optional[str] = Field(
+    website: str | None = Field(
         None,
         description="Website URL. GEDCOM tag: WWW",
     )

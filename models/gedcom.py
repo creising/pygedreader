@@ -8,7 +8,7 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import TYPE_CHECKING
 
 from pydantic import Field, PrivateAttr
 
@@ -20,6 +20,9 @@ from .media import MediaObject
 from .repository import Repository
 from .source import Source
 from .submitter import Submitter
+
+if TYPE_CHECKING:
+    from .source_citation import SourceCitation
 
 
 class Gedcom(GedcomBaseModel):
@@ -41,7 +44,7 @@ class Gedcom(GedcomBaseModel):
         media_objects: Media object records. GEDCOM tag: OBJE
     """
 
-    header: Optional[Header] = Field(
+    header: Header | None = Field(
         None,
         description="File header with metadata. GEDCOM tag: HEAD",
     )
@@ -90,7 +93,7 @@ class Gedcom(GedcomBaseModel):
         self._media_by_xref = {m.xref: m for m in self.media_objects}
         self._lookups_built = True
 
-    def get_individual(self, xref: XRef) -> Optional[Individual]:
+    def get_individual(self, xref: XRef) -> Individual | None:
         """Look up an individual by XREF.
 
         Args:
@@ -102,7 +105,7 @@ class Gedcom(GedcomBaseModel):
         self._build_lookups()
         return self._individuals_by_xref.get(xref)
 
-    def get_family(self, xref: XRef) -> Optional[Family]:
+    def get_family(self, xref: XRef) -> Family | None:
         """Look up a family by XREF.
 
         Args:
@@ -114,7 +117,7 @@ class Gedcom(GedcomBaseModel):
         self._build_lookups()
         return self._families_by_xref.get(xref)
 
-    def get_source(self, xref: XRef) -> Optional[Source]:
+    def get_source(self, xref: XRef) -> Source | None:
         """Look up a source by XREF.
 
         Args:
@@ -126,7 +129,7 @@ class Gedcom(GedcomBaseModel):
         self._build_lookups()
         return self._sources_by_xref.get(xref)
 
-    def get_repository(self, xref: XRef) -> Optional[Repository]:
+    def get_repository(self, xref: XRef) -> Repository | None:
         """Look up a repository by XREF.
 
         Args:
@@ -138,7 +141,7 @@ class Gedcom(GedcomBaseModel):
         self._build_lookups()
         return self._repositories_by_xref.get(xref)
 
-    def get_media(self, xref: XRef) -> Optional[MediaObject]:
+    def get_media(self, xref: XRef) -> MediaObject | None:
         """Look up a media object by XREF.
 
         Args:
@@ -202,7 +205,8 @@ class Gedcom(GedcomBaseModel):
                 source.repository = self.get_repository(source.repository_xref)
 
     def _resolve_source_citations(
-        self, citations: list["SourceCitation"]  # noqa: F821
+        self,
+        citations: list[SourceCitation],  # noqa: F821
     ) -> None:
         """Resolve source references in a list of citations.
 

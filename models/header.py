@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#HEADER
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel, XRef
@@ -58,27 +56,27 @@ class SourceSystem(GedcomBaseModel):
         ...,
         description="Source system identifier. GEDCOM tag: SOUR",
     )
-    name: Optional[str] = Field(
+    name: str | None = Field(
         None,
         description="System name. GEDCOM tag: NAME",
     )
-    version: Optional[str] = Field(
+    version: str | None = Field(
         None,
         description="System version. GEDCOM tag: VERS",
     )
-    corporation: Optional[str] = Field(
+    corporation: str | None = Field(
         None,
         description="Corporation name. GEDCOM tag: CORP",
     )
-    phone: Optional[str] = Field(
+    phone: str | None = Field(
         None,
         description="Corporation phone. GEDCOM tag: PHON",
     )
-    website: Optional[str] = Field(
+    website: str | None = Field(
         None,
         description="Corporation website. GEDCOM tag: WWW",
     )
-    address: Optional[str] = Field(
+    address: str | None = Field(
         None,
         description="Corporation address. GEDCOM tag: ADDR",
     )
@@ -105,23 +103,23 @@ class Header(GedcomBaseModel):
         notes: Header notes. GEDCOM tag: NOTE
     """
 
-    source: Optional[SourceSystem] = Field(
+    source: SourceSystem | None = Field(
         None,
         description="Source system information. GEDCOM tag: SOUR",
     )
-    date: Optional[GedcomDate] = Field(
+    date: GedcomDate | None = Field(
         None,
         description="Export date. GEDCOM tag: DATE",
     )
-    time: Optional[str] = Field(
+    time: str | None = Field(
         None,
         description="Export time. GEDCOM tag: TIME",
     )
-    submitter_xref: Optional[XRef] = Field(
+    submitter_xref: XRef | None = Field(
         None,
         description="Reference to submitter. GEDCOM tag: SUBM",
     )
-    gedcom_version: Optional[GedcomVersion] = Field(
+    gedcom_version: GedcomVersion | None = Field(
         None,
         description="GEDCOM version info. GEDCOM tag: GEDC",
     )
@@ -129,11 +127,11 @@ class Header(GedcomBaseModel):
         "UTF-8",
         description="Character encoding. GEDCOM tag: CHAR",
     )
-    language: Optional[str] = Field(
+    language: str | None = Field(
         None,
         description="Language. GEDCOM tag: LANG",
     )
-    filename: Optional[str] = Field(
+    filename: str | None = Field(
         None,
         description="Original filename. GEDCOM tag: FILE",
     )

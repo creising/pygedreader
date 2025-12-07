@@ -13,7 +13,6 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-
 # Type alias for cross-references (e.g., "@I123@", "@F456@")
 XRef = str
 

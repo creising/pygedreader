@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#PLACE_STRUCTURE
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomBaseModel
@@ -38,27 +36,27 @@ class Place(GedcomBaseModel):
         ...,
         description="Full place name. GEDCOM tag: PLAC",
     )
-    city: Optional[str] = Field(
+    city: str | None = Field(
         None,
         description="Locality/city (typically first component).",
     )
-    county: Optional[str] = Field(
+    county: str | None = Field(
         None,
         description="County/district component.",
     )
-    state: Optional[str] = Field(
+    state: str | None = Field(
         None,
         description="State/province component.",
     )
-    country: Optional[str] = Field(
+    country: str | None = Field(
         None,
         description="Country (typically last component).",
     )
-    latitude: Optional[float] = Field(
+    latitude: float | None = Field(
         None,
         description="Geographic latitude. GEDCOM tag: LATI",
     )
-    longitude: Optional[float] = Field(
+    longitude: float | None = Field(
         None,
         description="Geographic longitude. GEDCOM tag: LONG",
     )
@@ -80,10 +78,10 @@ class Place(GedcomBaseModel):
         name = place_str.strip()
         parts = [p.strip() for p in name.split(",") if p.strip()]
 
-        city: Optional[str] = None
-        county: Optional[str] = None
-        state: Optional[str] = None
-        country: Optional[str] = None
+        city: str | None = None
+        county: str | None = None
+        state: str | None = None
+        country: str | None = None
 
         # Assign based on number of parts
         # Common patterns: "City, State, Country" or "City, County, State, Country"

@@ -9,7 +9,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#INDIVIDUAL_EVENT_STRU
 from __future__ import annotations
 
 from enum import Enum
-from typing import Optional
 
 from pydantic import Field
 
@@ -107,35 +106,35 @@ class Event(GedcomBaseModel):
         ...,
         description="GEDCOM tag (BIRT, DEAT, MARR, RESI, _MILT, etc.).",
     )
-    event_type: Optional[EventType] = Field(
+    event_type: EventType | None = Field(
         None,
         description="Parsed EventType enum for standard events.",
     )
-    value: Optional[str] = Field(
+    value: str | None = Field(
         None,
         description="Optional tag value (e.g., 'Y' for '1 DEAT Y').",
     )
-    date: Optional[GedcomDate] = Field(
+    date: GedcomDate | None = Field(
         None,
         description="When the event occurred. GEDCOM tag: DATE",
     )
-    place: Optional[Place] = Field(
+    place: Place | None = Field(
         None,
         description="Where the event occurred. GEDCOM tag: PLAC",
     )
-    type_detail: Optional[str] = Field(
+    type_detail: str | None = Field(
         None,
         description="Sub-type or description. GEDCOM tag: TYPE",
     )
-    cause: Optional[str] = Field(
+    cause: str | None = Field(
         None,
         description="Cause (typically for death). GEDCOM tag: CAUS",
     )
-    age: Optional[str] = Field(
+    age: str | None = Field(
         None,
         description="Age at time of event. GEDCOM tag: AGE",
     )
-    agency: Optional[str] = Field(
+    agency: str | None = Field(
         None,
         description="Responsible agency. GEDCOM tag: AGNC",
     )
@@ -147,7 +146,7 @@ class Event(GedcomBaseModel):
         default_factory=list,
         description="Notes about this event. GEDCOM tag: NOTE",
     )
-    adopted_by: Optional[str] = Field(
+    adopted_by: str | None = Field(
         None,
         description="For adoption: HUSB, WIFE, or BOTH. GEDCOM tag: ADOP",
     )
@@ -162,7 +161,7 @@ class Event(GedcomBaseModel):
         return self.tag.startswith("_")
 
     @classmethod
-    def from_tag(cls, tag: str, value: Optional[str] = None) -> Event:
+    def from_tag(cls, tag: str, value: str | None = None) -> Event:
         """Create an Event from a GEDCOM tag.
 
         Args:
@@ -172,7 +171,7 @@ class Event(GedcomBaseModel):
         Returns:
             Event with tag set and event_type parsed if standard.
         """
-        event_type: Optional[EventType] = None
+        event_type: EventType | None = None
         try:
             event_type = EventType(tag)
         except ValueError:
@@ -197,11 +196,11 @@ class FamilyEvent(Event):
         spouse2_age: Age of second spouse at event. GEDCOM tag: WIFE.AGE
     """
 
-    spouse1_age: Optional[str] = Field(
+    spouse1_age: str | None = Field(
         None,
         description="Age of first spouse. GEDCOM tag: HUSB.AGE",
     )
-    spouse2_age: Optional[str] = Field(
+    spouse2_age: str | None = Field(
         None,
         description="Age of second spouse. GEDCOM tag: WIFE.AGE",
     )

@@ -5,7 +5,7 @@ Converts GedcomNode trees into Pydantic model objects.
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from models import (
     Address,
@@ -37,14 +37,14 @@ from models.submitter import Submitter
 from .tree import GedcomNode
 
 
-def parse_date(node: Optional[GedcomNode]) -> Optional[GedcomDate]:
+def parse_date(node: GedcomNode | None) -> GedcomDate | None:
     """Parse a DATE node into a GedcomDate."""
     if node is None or node.value is None:
         return None
     return GedcomDate.from_string(node.value)
 
 
-def parse_place(node: Optional[GedcomNode]) -> Optional[Place]:
+def parse_place(node: GedcomNode | None) -> Place | None:
     """Parse a PLAC node into a Place."""
     if node is None or node.value is None:
         return None
@@ -307,9 +307,25 @@ def _parse_individual_events(node: GedcomNode, individual: Individual) -> None:
 
     # Other standard events
     other_event_tags = {
-        "BAPM", "BARM", "BASM", "BLES", "CHRA", "CONF", "FCOM",
-        "ORDN", "NATU", "EMIG", "IMMI", "CENS", "PROB", "WILL",
-        "GRAD", "RETI", "EVEN", "ADOP", "CREM",
+        "BAPM",
+        "BARM",
+        "BASM",
+        "BLES",
+        "CHRA",
+        "CONF",
+        "FCOM",
+        "ORDN",
+        "NATU",
+        "EMIG",
+        "IMMI",
+        "CENS",
+        "PROB",
+        "WILL",
+        "GRAD",
+        "RETI",
+        "EVEN",
+        "ADOP",
+        "CREM",
     }
     for child in node.children:
         if child.tag in other_event_tags:
@@ -585,7 +601,7 @@ def _collect_custom_tags(node: GedcomNode) -> dict[str, list[Any]]:
     return custom_tags
 
 
-def _parse_int(value: Optional[str]) -> Optional[int]:
+def _parse_int(value: str | None) -> int | None:
     """Safely parse an integer value."""
     if value is None:
         return None

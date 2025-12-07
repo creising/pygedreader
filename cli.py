@@ -15,7 +15,6 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any
 
 from models import Gedcom
 from parser import parse_file
@@ -59,12 +58,14 @@ def parse_args() -> argparse.Namespace:
         help="Input GEDCOM file",
     )
     parse_parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         type=Path,
         help="Output file (default: stdout)",
     )
     parse_parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         choices=["json"],
         default="json",
         help="Output format (default: json)",

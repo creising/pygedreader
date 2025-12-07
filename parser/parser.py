@@ -6,7 +6,7 @@ Parses a complete GEDCOM file into a Gedcom model object.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TextIO, Union
+from typing import TextIO
 
 from models import Gedcom
 
@@ -20,10 +20,10 @@ from .record_parser import (
     parse_submitter,
 )
 from .tokenizer import tokenize_file, tokenize_string
-from .tree import build_tree, group_by_record_type
+from .tree import GedcomNode, build_tree, group_by_record_type
 
 
-def parse_file(path: Union[str, Path], encoding: str = "utf-8") -> Gedcom:
+def parse_file(path: str | Path, encoding: str = "utf-8") -> Gedcom:
     """Parse a GEDCOM file into a Gedcom model.
 
     Args:
@@ -34,7 +34,7 @@ def parse_file(path: Union[str, Path], encoding: str = "utf-8") -> Gedcom:
         Parsed Gedcom object with all records and resolved references.
     """
     path = Path(path)
-    with open(path, "r", encoding=encoding) as f:
+    with open(path, encoding=encoding) as f:
         return parse_fileobj(f)
 
 
@@ -66,7 +66,7 @@ def parse_fileobj(file: TextIO) -> Gedcom:
     return _parse_nodes(nodes)
 
 
-def _parse_nodes(nodes: list) -> Gedcom:
+def _parse_nodes(nodes: list[GedcomNode]) -> Gedcom:
     """Parse tree nodes into a Gedcom model.
 
     Args:

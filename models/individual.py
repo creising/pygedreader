@@ -8,7 +8,7 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#INDIVIDUAL_RECORD
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from pydantic import Field
 
@@ -42,16 +42,16 @@ class FamilyLink(GedcomBaseModel):
         ...,
         description="Reference to FAM record. GEDCOM tag: FAMC or FAMS",
     )
-    family: Optional["Family"] = Field(
+    family: Family | None = Field(
         None,
         exclude=True,
         description="Resolved Family object (populated after parsing).",
     )
-    pedigree: Optional[str] = Field(
+    pedigree: str | None = Field(
         None,
         description="Pedigree: birth, adopted, foster, sealing. GEDCOM tag: PEDI",
     )
-    status: Optional[str] = Field(
+    status: str | None = Field(
         None,
         description="Link status. GEDCOM tag: STAT",
     )
@@ -70,7 +70,7 @@ class MediaLink(GedcomBaseModel):
         ...,
         description="Reference to OBJE record. GEDCOM tag: OBJE",
     )
-    media: Optional["MediaObject"] = Field(
+    media: MediaObject | None = Field(
         None,
         exclude=True,
         description="Resolved MediaObject (populated after parsing).",
@@ -117,7 +117,7 @@ class Individual(GedcomRecord):
         default_factory=list,
         description="Person's names (birth, married, aka). GEDCOM tag: NAME",
     )
-    sex: Optional[str] = Field(
+    sex: str | None = Field(
         None,
         description="Biological sex: M, F, U (unknown), X. GEDCOM tag: SEX",
     )
@@ -127,19 +127,19 @@ class Individual(GedcomRecord):
     )
 
     # Life events
-    birth: Optional[Event] = Field(
+    birth: Event | None = Field(
         None,
         description="Birth event. GEDCOM tag: BIRT",
     )
-    death: Optional[Event] = Field(
+    death: Event | None = Field(
         None,
         description="Death event. GEDCOM tag: DEAT",
     )
-    christening: Optional[Event] = Field(
+    christening: Event | None = Field(
         None,
         description="Christening event. GEDCOM tag: CHR",
     )
-    burial: Optional[Event] = Field(
+    burial: Event | None = Field(
         None,
         description="Burial event. GEDCOM tag: BURI",
     )
@@ -203,7 +203,7 @@ class Individual(GedcomRecord):
     )
 
     @property
-    def primary_name(self) -> Optional[Name]:
+    def primary_name(self) -> Name | None:
         """Get the primary (first) name.
 
         Returns:

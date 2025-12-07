@@ -8,7 +8,7 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#SOURCE_CITATION
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from pydantic import Field
 
@@ -31,15 +31,15 @@ class SourceData(GedcomBaseModel):
         www: URL to the source (Ancestry extension). GEDCOM tag: WWW
     """
 
-    date: Optional[str] = Field(
+    date: str | None = Field(
         None,
         description="Date of the source data. GEDCOM tag: DATE",
     )
-    text: Optional[str] = Field(
+    text: str | None = Field(
         None,
         description="Transcribed text from the source. GEDCOM tag: TEXT",
     )
-    www: Optional[str] = Field(
+    www: str | None = Field(
         None,
         description="URL to source (Ancestry extension). GEDCOM tag: WWW",
     )
@@ -71,20 +71,20 @@ class SourceCitation(GedcomBaseModel):
         quality: Quality/reliability rating (0-3). GEDCOM tag: QUAY
     """
 
-    xref: Optional[XRef] = Field(
+    xref: XRef | None = Field(
         None,
         description="Reference to top-level SOUR record. GEDCOM tag: SOUR @XREF@",
     )
-    source: Optional["Source"] = Field(
+    source: Source | None = Field(
         None,
         exclude=True,
         description="Resolved Source object (populated after parsing).",
     )
-    page: Optional[str] = Field(
+    page: str | None = Field(
         None,
         description="Specific location in source. GEDCOM tag: PAGE",
     )
-    data: Optional[SourceData] = Field(
+    data: SourceData | None = Field(
         None,
         description="Nested DATA structure. GEDCOM tag: DATA",
     )
@@ -92,7 +92,7 @@ class SourceCitation(GedcomBaseModel):
         default_factory=list,
         description="Notes on this citation. GEDCOM tag: NOTE",
     )
-    quality: Optional[int] = Field(
+    quality: int | None = Field(
         None,
         ge=0,
         le=3,

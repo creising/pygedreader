@@ -8,8 +8,6 @@ https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#SUBMITTER_RECORD
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import Field
 
 from .base import GedcomRecord
@@ -37,19 +35,19 @@ class Submitter(GedcomRecord):
         ...,
         description="Submitter name. GEDCOM tag: NAME",
     )
-    address: Optional[str] = Field(
+    address: str | None = Field(
         None,
         description="Postal address. GEDCOM tag: ADDR",
     )
-    phone: Optional[str] = Field(
+    phone: str | None = Field(
         None,
         description="Phone number. GEDCOM tag: PHON",
     )
-    email: Optional[str] = Field(
+    email: str | None = Field(
         None,
         description="Email address. GEDCOM tag: EMAIL",
     )
-    website: Optional[str] = Field(
+    website: str | None = Field(
         None,
         description="Website URL. GEDCOM tag: WWW",
     )
