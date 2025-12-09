@@ -1,0 +1,37 @@
+site_name: pygedreader
+site_description: A Python library for parsing GEDCOM files with Ancestry.com export support
+site_url: https://pygedreader.readthedocs.io
+repo_url: https://github.com/creising/pygedreader
+repo_name: creising/pygedreader
+
+theme:
+  name: cinder
+  colorscheme: github
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: true
+            show_root_heading: true
+            heading_level: 2
+            docstring_style: google
+
+markdown_extensions:
+  - codehilite
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - CLI Reference: cli.md
+  - API Reference:
+      - Overview: api/index.md
+      - Models: api/models.md
+      - Parser: api/parser.md
+  - Ancestry Quirks: ancestry-quirks.md
