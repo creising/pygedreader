@@ -1,6 +1,11 @@
 # pygedreader
 
+[![PyPI](https://img.shields.io/pypi/v/pygedreader)](https://pypi.org/project/pygedreader/)
+[![Documentation](https://readthedocs.org/projects/pygedreader/badge/?version=latest)](https://pygedreader.readthedocs.io/en/latest/)
+
 A Python library for parsing GEDCOM 5.5.1 files, with full support for Ancestry.com exports.
+
+**[Documentation](https://pygedreader.readthedocs.io)** | **[PyPI](https://pypi.org/project/pygedreader/)**
 
 ## Why pygedreader?
 
