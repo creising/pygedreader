@@ -3,7 +3,6 @@
 [![PyPI](https://img.shields.io/pypi/v/pygedreader)](https://pypi.org/project/pygedreader/)
 [![Python](https://img.shields.io/pypi/pyversions/pygedreader)](https://pypi.org/project/pygedreader/)
 [![CI](https://github.com/creising/pygedreader/actions/workflows/ci.yml/badge.svg)](https://github.com/creising/pygedreader/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/creising/pygedreader/graph/badge.svg)](https://codecov.io/gh/creising/pygedreader)
 [![Documentation](https://readthedocs.org/projects/pygedreader/badge/?version=latest)](https://pygedreader.readthedocs.io/en/latest/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)

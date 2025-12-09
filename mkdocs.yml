@@ -3,6 +3,7 @@ site_description: A Python library for parsing GEDCOM files with Ancestry.com ex
 site_url: https://pygedreader.readthedocs.io
 repo_url: https://github.com/creising/pygedreader
 repo_name: creising/pygedreader
+edit_uri: blob/main/docs/
 
 theme:
   name: cinder
