@@ -1,6 +1,6 @@
 """Tests for GEDCOM custom tag handling."""
 
-from parser import parse_string
+from pygedreader import parse_string
 
 
 class TestCustomTagsOnRecords:

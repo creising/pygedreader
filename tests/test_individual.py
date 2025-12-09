@@ -1,6 +1,6 @@
 """Tests for GEDCOM individual parsing."""
 
-from parser import parse_string
+from pygedreader import parse_string
 
 
 class TestIndividualBasics:

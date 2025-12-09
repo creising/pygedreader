@@ -1,6 +1,6 @@
 """Tests for GEDCOM place parsing."""
 
-from models import Place
+from pygedreader.models import Place
 
 
 class TestPlaceParsing:

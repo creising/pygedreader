@@ -2,7 +2,7 @@
 
 from datetime import date
 
-from models import DateModifier, GedcomDate
+from pygedreader.models import DateModifier, GedcomDate
 
 
 class TestStandardDateFormats:

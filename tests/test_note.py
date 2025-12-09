@@ -1,6 +1,6 @@
 """Tests for GEDCOM note parsing."""
 
-from models import Note
+from pygedreader.models import Note
 
 
 class TestNoteParsing:

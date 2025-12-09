@@ -70,7 +70,7 @@ pygedreader parse family-tree.ged --indent 0 -o output.json
 ## Library Usage
 
 ```python
-from parser import parse_file
+from pygedreader import parse_file
 
 # Parse a GEDCOM file
 gedcom = parse_file("family-tree.ged")
@@ -125,15 +125,15 @@ uv sync
 Run the CLI locally:
 
 ```bash
-uv run python cli.py info family-tree.ged
-uv run python cli.py parse family-tree.ged -o output.json
+uv run pygedreader info family-tree.ged
+uv run pygedreader parse family-tree.ged -o output.json
 ```
 
 Use the library in a Python script:
 
 ```bash
 uv run python -c "
-from parser import parse_file
+from pygedreader import parse_file
 gedcom = parse_file('family-tree.ged')
 print(gedcom.stats)
 "
@@ -142,8 +142,9 @@ print(gedcom.stats)
 Run type checking and linting:
 
 ```bash
-uv run mypy models parser cli.py
+uv run mypy src tests
 uv run ruff check .
+uv run pytest
 ```
 
 ## License

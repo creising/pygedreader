@@ -1,6 +1,6 @@
 """Tests for full GEDCOM file parsing."""
 
-from parser import parse_string
+from pygedreader import parse_string
 
 
 class TestMinimalGedcom:

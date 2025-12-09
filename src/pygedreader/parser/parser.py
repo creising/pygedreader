@@ -8,7 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TextIO
 
-from models import Gedcom
+from pygedreader.models import Gedcom
 
 from .record_parser import (
     parse_family,

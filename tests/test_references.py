@@ -1,6 +1,6 @@
 """Tests for GEDCOM cross-reference resolution."""
 
-from parser import parse_string
+from pygedreader import parse_string
 
 
 class TestIndividualToFamilyRefs:

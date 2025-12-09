@@ -1,6 +1,6 @@
 """Tests for GEDCOM name parsing."""
 
-from models import Name
+from pygedreader.models import Name
 
 
 class TestNameParsing:

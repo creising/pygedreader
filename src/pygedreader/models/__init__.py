@@ -4,7 +4,7 @@ This package provides Pydantic models for parsing and representing
 GEDCOM 5.5.1 files, with full support for Ancestry.com export quirks.
 
 Example usage:
-    from models import Gedcom, Individual, Family
+    from pygedreader.models import Gedcom, Individual, Family
 
     # After parsing a GEDCOM file:
     gedcom = Gedcom(individuals=[...], families=[...])

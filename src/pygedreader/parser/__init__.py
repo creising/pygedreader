@@ -3,7 +3,7 @@
 Provides functionality to parse GEDCOM files into Pydantic models.
 
 Example usage:
-    from parser import parse_file
+    from pygedreader.parser import parse_file
 
     gedcom = parse_file("family-tree.ged")
     print(f"Loaded {len(gedcom.individuals)} individuals")

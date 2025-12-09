@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from models import (
+from pygedreader.models import (
     Address,
     ChildLink,
     Event,
@@ -27,12 +27,12 @@ from models import (
     SourceSystem,
     SpouseLink,
 )
-from models.family import Family
-from models.header import Header
-from models.individual import Individual
-from models.media import MediaObject
-from models.repository import Repository
-from models.submitter import Submitter
+from pygedreader.models.family import Family
+from pygedreader.models.header import Header
+from pygedreader.models.individual import Individual
+from pygedreader.models.media import MediaObject
+from pygedreader.models.repository import Repository
+from pygedreader.models.submitter import Submitter
 
 from .tree import GedcomNode
 

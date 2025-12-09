@@ -16,8 +16,8 @@ import json
 import sys
 from pathlib import Path
 
-from models import Gedcom
-from parser import parse_file
+from pygedreader.models import Gedcom
+from pygedreader.parser import parse_file
 
 
 def main() -> int:
